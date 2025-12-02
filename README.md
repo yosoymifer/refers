@@ -1,59 +1,187 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistema de Referidos - Universal Gold
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistema completo de gestión de referidos para la joyería Universal Gold, desarrollado con Laravel 12, Livewire 3 y Tailwind CSS.
 
-## About Laravel
+## Características
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- ✅ Panel de administración con métricas y gestión de influencers
+- ✅ Panel de influencer con dashboard personal y estadísticas
+- ✅ Sistema de captura de leads mediante landing page pública
+- ✅ Generación automática de cupones QR únicos
+- ✅ Escáner QR para canjear cupones en tienda
+- ✅ Registro de ventas con cálculo automático de comisiones
+- ✅ Sistema de roles (Admin/Influencer)
+- ✅ Diseño responsive con colores de marca Universal Gold
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Instalación
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 1. Instalar dependencias de PHP
 
-## Learning Laravel
+```bash
+composer install
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Esto instalará:
+- Livewire 3
+- Simple QRCode
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 2. Instalar dependencias de Node.js
 
-## Laravel Sponsors
+```bash
+npm install
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Esto instalará:
+- html5-qrcode (para el escáner)
 
-### Premium Partners
+### 3. Configurar el entorno
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Copia el archivo `.env.example` a `.env` (si no existe) y configura:
 
-## Contributing
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 4. Ejecutar migraciones
 
-## Code of Conduct
+```bash
+php artisan migrate
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 5. Crear usuario administrador
 
-## Security Vulnerabilities
+```bash
+php artisan db:seed
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Esto creará un usuario admin con:
+- **Email:** admin@universalgold.com
+- **Password:** password
 
-## License
+**⚠️ IMPORTANTE:** Cambia la contraseña después del primer inicio de sesión.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 6. Crear enlace simbólico para storage
+
+```bash
+php artisan storage:link
+```
+
+Esto permite que las imágenes QR sean accesibles públicamente.
+
+### 7. Compilar assets
+
+```bash
+npm run build
+```
+
+O para desarrollo con hot reload:
+
+```bash
+npm run dev
+```
+
+### 8. Iniciar servidor
+
+```bash
+php artisan serve
+```
+
+## Uso del Sistema
+
+### Como Administrador
+
+1. Inicia sesión con las credenciales del seeder
+2. Accede al **Dashboard** para ver métricas generales
+3. Ve a **Influencers** para gestionar influencers:
+   - Crear nuevos influencers
+   - Editar porcentajes de comisión y descuento
+   - Activar/desactivar influencers
+4. Usa **Escanear QR** para:
+   - Escanear cupones de clientes
+   - Registrar ventas
+   - Aplicar descuentos automáticamente
+
+### Como Influencer
+
+1. El admin te crea una cuenta
+2. Inicia sesión con tus credenciales
+3. En tu dashboard verás:
+   - Tu código de referido y QR
+   - Estadísticas de tus leads
+   - Tus comisiones ganadas
+   - Historial de ventas
+
+### Para Clientes
+
+1. El influencer comparte su link: `/r/{CODIGO}`
+2. El cliente completa el formulario
+3. Recibe un cupón único con QR
+4. Presenta el QR en la tienda para obtener su descuento
+
+## Estructura del Proyecto
+
+```
+app/
+├── Http/Controllers/
+│   ├── AuthController.php          # Autenticación
+│   └── LandingController.php       # Landing pública
+├── Livewire/
+│   ├── Admin/
+│   │   ├── Dashboard.php           # Dashboard admin
+│   │   ├── InfluencerManager.php   # CRUD influencers
+│   │   └── QrScanner.php           # Escáner y registro ventas
+│   └── Influencer/
+│       └── Dashboard.php           # Dashboard influencer
+└── Models/
+    ├── User.php                    # Usuarios (admin/influencer)
+    ├── Lead.php                    # Leads/clientes potenciales
+    ├── Coupon.php                  # Cupones
+    └── Sale.php                    # Ventas
+
+resources/views/
+├── layouts/
+│   ├── app.blade.php               # Layout principal
+│   └── auth.blade.php              # Layout autenticación
+├── admin/                          # Vistas admin
+├── influencer/                     # Vistas influencer
+├── landing/                        # Landing pública
+└── livewire/                       # Componentes Livewire
+```
+
+## Colores de la Marca
+
+- **Primario (Verde):** #1e5128
+- **Secundario (Dorado):** #bc9313
+- **Fondo:** #FFFFFF
+
+## Tecnologías Utilizadas
+
+- **Backend:** Laravel 12
+- **Frontend:** Livewire 3, Tailwind CSS 4
+- **QR Codes:** SimpleSoftwareIO/Simple-QrCode
+- **QR Scanner:** html5-qrcode (JavaScript)
+- **Base de Datos:** SQLite (configurado por defecto)
+
+## Notas Importantes
+
+1. **Permisos de Cámara:** El escáner QR requiere permisos de cámara del navegador
+2. **Storage:** Asegúrate de ejecutar `php artisan storage:link` para que los QR sean accesibles
+3. **Seguridad:** Cambia las credenciales por defecto en producción
+4. **HTTPS:** Para usar la cámara, el sitio debe estar en HTTPS (o localhost)
+
+## Desarrollo
+
+Para desarrollo activo:
+
+```bash
+# Terminal 1: Servidor Laravel
+php artisan serve
+
+# Terminal 2: Vite (hot reload)
+npm run dev
+```
+
+## Licencia
+
+Proyecto desarrollado para Universal Gold.
