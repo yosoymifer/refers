@@ -1,0 +1,4 @@
+# Composer configuration for production
+# This file can be used to set environment-specific Composer settings
+# For Heroku/similar platforms, Composer will use system certificates automatically
+

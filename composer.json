@@ -82,15 +82,14 @@
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
         },
-        "secure-http": true,
-        "cafile": "F:\\laragon\\bin\\php\\php-8.2.29-Win32-vs16-x64\\extras\\ssl\\cacert.pem"
+        "secure-http": true
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
     "repositories": {
         "packagist": {
             "type": "composer",
-            "url": "http://repo.packagist.org"
+            "url": "https://repo.packagist.org"
         }
     }
 }

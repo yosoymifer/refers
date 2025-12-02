@@ -182,6 +182,68 @@ php artisan serve
 npm run dev
 ```
 
+## Despliegue en Producción
+
+### Checklist Pre-Despliegue
+
+1. **Variables de Entorno**
+   - Configura `.env` con `APP_ENV=production` y `APP_DEBUG=false`
+   - Configura la base de datos de producción
+   - Establece `APP_URL` con HTTPS
+
+2. **Comandos en el Servidor**
+   ```bash
+   # Instalar dependencias (sin dev)
+   composer install --optimize-autoloader --no-dev
+   
+   # Compilar assets
+   npm install
+   npm run build
+   
+   # Ejecutar migraciones
+   php artisan migrate --force
+   
+   # Crear admin inicial
+   php artisan db:seed --class=AdminSeeder
+   
+   # Optimizar Laravel
+   php artisan config:cache
+   php artisan route:cache
+   php artisan view:cache
+   
+   # Enlace simbólico de storage
+   php artisan storage:link
+   ```
+
+3. **Permisos**
+   ```bash
+   chmod -R 775 storage bootstrap/cache
+   ```
+
+4. **HTTPS (Importante)**
+   - El escáner QR **requiere HTTPS** para funcionar
+   - Configura SSL/TLS en tu servidor
+   - Actualiza `APP_URL` en `.env` con `https://`
+
+### Solución de Problemas de Certificados CA
+
+Si encuentras errores de certificados CA durante el despliegue:
+
+- El `composer.json` ya está configurado para usar los certificados del sistema
+- En servidores Linux/Heroku, Composer usará automáticamente los certificados del sistema
+- Si es necesario, puedes descargar certificados manualmente:
+  ```bash
+  curl -o cacert.pem https://curl.se/ca/cacert.pem
+  export COMPOSER_CAFILE="$(pwd)/cacert.pem"
+  ```
+
+### Notas de Seguridad
+
+- ✅ Cambia la contraseña del admin después del primer login
+- ✅ Usa `APP_DEBUG=false` en producción
+- ✅ Configura HTTPS para el escáner QR
+- ✅ Revisa permisos de archivos y directorios
+
 ## Licencia
 
 Proyecto desarrollado para Universal Gold.
