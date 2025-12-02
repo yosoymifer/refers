@@ -92,3 +92,4 @@ class QrScanner extends Component
 }
 
 
+

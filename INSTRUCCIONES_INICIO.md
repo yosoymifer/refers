@@ -52,3 +52,4 @@ Después de ejecutar los comandos, intenta iniciar sesión nuevamente. Si aún n
 2. Que el seeder se ejecutó sin errores
 3. Que estás usando exactamente: `admin@universalgold.com` y `password`
 
+

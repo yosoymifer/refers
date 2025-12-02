@@ -44,3 +44,4 @@ php artisan vendor:publish --tag=livewire:config
 
 Pero normalmente no es necesario, Livewire se auto-descubre en Laravel 11+.
 
+

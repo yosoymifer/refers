@@ -50,3 +50,4 @@ class Sale extends Model
 }
 
 
+

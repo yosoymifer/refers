@@ -6,3 +6,4 @@ return [
     'throttle' => 'Demasiados intentos de acceso. Por favor intente nuevamente en :seconds segundos.',
 ];
 
+
