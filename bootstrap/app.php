@@ -15,6 +15,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => \App\Http\Middleware\EnsureUserIsAdmin::class,
             'influencer' => \App\Http\Middleware\EnsureUserIsInfluencer::class,
         ]);
+        
+        // Trust all proxies to detect HTTPS correctly
+        $middleware->trustProxies(at: '*');
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
