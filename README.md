@@ -237,6 +237,32 @@ Si encuentras errores de certificados CA durante el despliegue:
   export COMPOSER_CAFILE="$(pwd)/cacert.pem"
   ```
 
+### Error "Forbidden" en Producción
+
+Si obtienes un error "Forbidden" después del despliegue:
+
+1. **Verifica el DocumentRoot/root del servidor web:**
+   - Debe apuntar al directorio `public/` (NO a la raíz del proyecto)
+   - Apache: `DocumentRoot /ruta/proyecto/public`
+   - Nginx: `root /ruta/proyecto/public;`
+
+2. **Verifica permisos:**
+   ```bash
+   chmod -R 755 /ruta/proyecto
+   chmod -R 775 storage bootstrap/cache
+   ```
+
+3. **Verifica .htaccess (Apache):**
+   - Asegúrate de que `public/.htaccess` existe
+   - Habilita `mod_rewrite`: `sudo a2enmod rewrite`
+
+4. **Revisa los logs:**
+   - Apache: `/var/log/apache2/error.log`
+   - Nginx: `/var/log/nginx/error.log`
+   - Laravel: `storage/logs/laravel.log`
+
+📖 **Ver guía completa:** `TROUBLESHOOTING.md`
+
 ### Notas de Seguridad
 
 - ✅ Cambia la contraseña del admin después del primer login
